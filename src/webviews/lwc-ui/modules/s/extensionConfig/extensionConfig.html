@@ -21,9 +21,9 @@
                 <template if:false={loading}>
                     <template if:true={sections}>
                         <lightning-card hide-header="true" label="Extension Settings">
-                            <lightning-tabset>
+                            <lightning-tabset active-tab-value={activeTabValue}>
                                 <template for:each={sections} for:item="section" for:index="index">
-                                    <lightning-tab key={section.label} label={section.label}>
+                                    <lightning-tab key={section.value} value={section.value} label={section.label} icon-name={section.iconName}>
                                         <div class="slds-p-around_medium">
                                             <template if:true={section.description}>
                                                 <div class="slds-text-body_regular slds-text-color_weak slds-m-bottom_medium">

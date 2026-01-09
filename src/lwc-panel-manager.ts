@@ -227,6 +227,18 @@ export class LwcPanelManager {
   }
 
   /**
+   * Refresh all active panels (useful when configuration changes, like theme)
+   */
+  public refreshAllPanels(dataByPanel: any): void {
+    dataByPanel = dataByPanel || {};
+    this.activePanels.forEach((panel, lwcId) => {
+      if (!panel.isDisposed()) {
+        panel.refresh(dataByPanel[lwcId] || {});
+      }
+    });
+  }
+
+  /**
    * Clean up the manager instance
    */
   public dispose(): void {

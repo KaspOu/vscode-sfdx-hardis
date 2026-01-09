@@ -5,11 +5,13 @@ export default class ExtensionConfig extends LightningElement {
   @track sections = [];
   @track loading = true;
   @track error = null;
+  @track activeTabValue = null;
 
   @api
   initialize(data) {
     this.loading = false;
     this.error = null;
+    this.activeTabValue = data.activeTabValue || null;
     // Precompute all values for Lightning base components
     this.sections = (data.sections || []).map((section) => ({
       ...section,

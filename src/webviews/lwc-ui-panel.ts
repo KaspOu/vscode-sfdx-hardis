@@ -601,6 +601,158 @@ export class LwcUiPanel {
     this.panel.webview.html = this.getHtmlForWebview(webview);
   }
 
+  /**
+   * Refresh the webview HTML (useful when configuration changes, like theme)
+   */
+  public refresh(data: any): void {
+    if (data) {
+      this.initializationData = { ...this.initializationData, ...data };
+    }
+    this.update();
+  }
+
+  /**
+   * Resolve the theme to use based on the input and VS Code's active theme
+   * @param theme The input theme, can be "auto", "dark", "light", dark-high-contrast" or "light-high-contrast"
+   * @returns The resolved theme string
+   */
+  private resolveTheme(theme: string): string {
+    if (theme === "auto") {
+      const vsCodeTheme = vscode.window.activeColorTheme.kind;
+      switch (vsCodeTheme) {
+        case vscode.ColorThemeKind.Dark:
+          return "dark";
+        case vscode.ColorThemeKind.HighContrast:
+          return "dark-high-contrast";
+        case vscode.ColorThemeKind.HighContrastLight:
+          return "light-high-contrast";
+        case vscode.ColorThemeKind.Light:
+        default:
+          return "light";
+      }
+    }
+
+    return theme;  
+  }
+
+  /**
+   * Get the CSS class and styles for the specified theme
+   * @param theme The input theme, can be "auto", "dark", "light", dark-high-contrast" or "light-high-contrast"
+   * @returns An object containing the CSS class and styles for the theme
+   */
+  private getThemeSettings(theme: string): { themeClass: string; themeStyles: string } {
+    let themeClass = "slds-theme_default";
+    let themeStyles = "";
+
+    switch (this.resolveTheme(theme)) {
+      case "dark":
+        themeStyles = `
+          body {
+            background-color: #16191f !important;
+            color: #ecebea !important;
+          }
+          .slds-scope {
+            --lwc-colorBackground: #16191f;
+            --lwc-colorBackgroundAlt: #16191f;
+            --lwc-colorBorder: #514f4d;
+            --lwc-colorTextDefault: #ecebea;
+            --lwc-colorTextWeak: #c9c7c5;
+            --lwc-colorTextInverse: #080707;
+          }
+          .slds-card,
+          .slds-box,
+          .slds-page-header,
+          .slds-modal__content {
+            background-color: #1c1b19 !important;
+            color: #ecebea !important;
+            border-color: #514f4d !important;
+          }
+          .slds-input,
+          .slds-textarea,
+          .slds-select {
+            background-color: #16191f !important;
+            color: #ecebea !important;
+            border-color: #514f4d !important;
+          }
+        `;
+        break;
+      case "dark-high-contrast":
+        themeStyles = `
+          body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+          }
+          .slds-scope {
+            --lwc-colorBackground: #000000;
+            --lwc-colorBackgroundAlt: #000000;
+            --lwc-colorBorder: #ffffff;
+            --lwc-colorTextDefault: #ffffff;
+            --lwc-colorTextWeak: #ffffff;
+            --lwc-colorTextInverse: #000000;
+          }
+          .slds-card,
+          .slds-box,
+          .slds-page-header,
+          .slds-modal__content {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffffff !important;
+          }
+        `;
+        break;
+      case "light-high-contrast":
+        themeStyles = `
+          body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+          }
+          .slds-scope {
+            --lwc-colorBackground: #000000;
+            --lwc-colorBackgroundAlt: #000000;
+            --lwc-colorBorder: #ffffff;
+            --lwc-colorTextDefault: #ffffff;
+            --lwc-colorTextWeak: #ffffff;
+            --lwc-colorTextInverse: #000000;
+          }
+          .slds-card,
+          .slds-box,
+          .slds-page-header,
+          .slds-modal__content {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffffff !important;
+          }
+        `;
+        break;
+      case "light":
+      default:
+        themeStyles = `
+          body {
+            background-color: #EDF4FF !important;
+            color: #080707 !important;
+          }
+          .slds-scope {
+            --lwc-colorBackground: #EDF4FF;
+            --lwc-colorBackgroundAlt: #EDF4FF;
+            --lwc-colorBorder: #dddbda;
+            --lwc-colorTextDefault: #080707;
+            --lwc-colorTextWeak: #3e3e3c;
+            --lwc-colorTextInverse: #ffffff;
+          }
+          .slds-card,
+          .slds-box,
+          .slds-page-header,
+          .slds-modal__content {
+            background-color: #EDF4FF !important;
+            color: #080707 !important;
+          }
+        `;
+        break;
+    }
+
+    return { themeClass, themeStyles };
+  }
+
   private getHtmlForWebview(webview: vscode.Webview) {
     // Get the local path to main script run in the webview, then convert it to a uri we can use in the webview.
     const scriptUri = webview.asWebviewUri(
@@ -630,6 +782,11 @@ export class LwcUiPanel {
           .replace(/"/g, "&quot;")
       : "{}";
 
+    // Determine theme based on configuration
+    const config = vscode.workspace.getConfiguration("vsCodeSfdxHardis.theme");
+    const colorTheme = config.get("colorTheme", "auto");
+    const { themeClass, themeStyles } = this.getThemeSettings(colorTheme as string);
+
     return `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -643,9 +800,10 @@ export class LwcUiPanel {
         <style>
           body { margin: 0; padding: 0; }
           #app { width: 100%; height: 100vh; }
+          ${themeStyles}
         </style>
       </head>
-      <body class="slds-scope slds-theme_default">
+      <body class="slds-scope ${themeClass}">
         <div id="app" data-lwc-id="${this.lwcId}" data-init-data="${initDataJson}"></div>
         
         <script>
