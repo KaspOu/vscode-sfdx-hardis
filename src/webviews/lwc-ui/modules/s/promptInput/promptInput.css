@@ -127,3 +127,49 @@ lightning-helptext lightning-icon {
 .submission-modal lightning-spinner {
     --slds-c-spinner-color-foreground: #1589ee; /* Brand blue color */
 }
+
+/* Dark theme overrides (component-scoped) */
+.blue-back[data-theme="dark"] .select-option-desc {
+    color: #cbd5e1; /* lighter description text on dark bg */
+}
+
+.blue-back[data-theme="dark"] .select-option-button {
+    background: transparent;
+    color: #e6eef9;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.blue-back[data-theme="dark"] .select-option-button:hover {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.12);
+}
+
+.blue-back[data-theme="dark"] .select-option-button:focus {
+    outline: 2px solid #3ea6ff; /* brighter focus in dark */
+    outline-offset: 1px;
+}
+
+.blue-back[data-theme="dark"] lightning-input,
+.blue-back[data-theme="dark"] lightning-combobox {
+    color: #e6eef9;
+}
+
+.blue-back[data-theme="dark"] .submission-modal {
+    background: #0f1724; /* deep dark modal */
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 8px 36px rgba(2,6,23,0.6);
+}
+
+.blue-back[data-theme="dark"] .submission-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.blue-back[data-theme="dark"] lightning-helptext,
+.blue-back[data-theme="dark"] lightning-helptext::part(icon) {
+    color: #cbd5e1;
+}
+
+.blue-back[data-theme="dark"] .select-option-label {
+    color: #ffffff;
+}
+

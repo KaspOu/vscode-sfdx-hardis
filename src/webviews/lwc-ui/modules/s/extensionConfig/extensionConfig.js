@@ -1,5 +1,4 @@
 import { LightningElement, track, api } from "lwc";
-import "s/forceLightTheme"; // Ensure light theme is applied
 
 export default class ExtensionConfig extends LightningElement {
   @track sections = [];

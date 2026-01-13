@@ -2,10 +2,9 @@
     max-width: 600px;
 }
 
-.blue-back {
-	background: #EDF4FF;
-	min-height: 100vh;
-}
+
+
+
 
 /* Reduce vertical spacing between form elements */
 .slds-form-element {
@@ -23,20 +22,3 @@
 }
 
 /* Tighten spacing for lightning components */
-lightning-combobox,
-lightning-input {
-    margin-top: 0 !important;
-}
-
-/* Remove any default spacing from lightning component containers */
-lightning-combobox .slds-combobox_container,
-lightning-input .slds-form-element {
-    margin-top: 0 !important;
-}
-
-/* Remove top padding/margin from combobox specifically */
-lightning-combobox {
-    display: block;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}

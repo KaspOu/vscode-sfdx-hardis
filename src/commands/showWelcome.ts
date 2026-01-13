@@ -12,8 +12,12 @@ export function registerShowWelcome(command: Commands) {
       const config = vscode.workspace.getConfiguration("vsCodeSfdxHardis");
       const showWelcomeAtStartup = config.get("showWelcomeAtStartup", true);
 
+      // Get theme class (light-theme, dark-theme, or high-contrast-theme)
+      const colorTheme = config.get("colorTheme", "auto");
+      const theme = LwcPanelManager.resolveTheme(colorTheme);
       const panel = lwcManager.getOrCreatePanel("s-welcome", {
         showWelcomeAtStartup: showWelcomeAtStartup,
+        theme,
       });
       panel.updateTitle("SFDX Hardis Welcome");
 

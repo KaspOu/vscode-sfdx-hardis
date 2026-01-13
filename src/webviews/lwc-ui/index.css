@@ -1,0 +1,211 @@
+/* Theme Variables - Base for Light and Dark themes */
+/* This module defines CSS custom properties for theming all LWC components */
+
+:host .blue-back {
+  /* --theme-gradient-bg: red;
+  background: red; */
+    /* background: var(--theme-gradient-bg); */
+}
+
+
+.light-themee {
+  /* ===== BACKGROUND COLORS ===== */
+  --theme-bg-primary: #f8f9ff;              /* Main background gradient start */
+  --theme-bg-primary-end: #e8f4fd;          /* Main background gradient end */
+  --theme-bg-secondary: #ffffff;            /* Card/panel background */
+  --theme-bg-tertiary: #f8f9fa;             /* Settings section background */
+  --theme-bg-highlight: #f3f9ff;            /* Getting started section gradient start */
+  --theme-bg-highlight-end: #dbeafe;        /* Getting started section gradient end */
+  --theme-bg-success: #f0fdf4;              /* Open source section gradient start */
+  --theme-bg-success-end: #dcfce7;          /* Open source section gradient end */
+  --theme-bg-overlay: rgba(255, 255, 255, 0.7);  /* Semi-transparent overlay */
+  --theme-bg-overlay-strong: rgba(255, 255, 255, 0.9);  /* Strong overlay */
+
+  /* ===== TEXT COLORS ===== */
+  --theme-text-primary: #181818;            /* Main text, headings */
+  --theme-text-secondary: #706e6b;          /* Subtitles, descriptions */
+  --theme-text-tertiary: #4a5568;           /* Body text in special sections */
+  --theme-text-quaternary: #4b5563;         /* Services card text */
+  --theme-text-dark: #1f2937;               /* Dark emphasis text */
+
+  /* ===== BORDER COLORS ===== */
+  --theme-border-light: #e5e5e5;            /* Light borders */
+  --theme-border-medium: #e9ecef;           /* Medium borders */
+  --theme-border-primary: rgba(21, 137, 238, 0.2);  /* Primary accent border */
+  --theme-border-success: rgba(34, 197, 94, 0.2);   /* Success accent border */
+  --theme-border-highlight: #bbdefb;        /* Highlight section border */
+  --theme-border-success-strong: #bbf7d0;   /* Strong success border */
+  --theme-border-neutral: rgba(156, 163, 175, 0.3); /* Neutral border */
+
+  /* ===== PRIMARY BRAND COLORS ===== */
+  --theme-primary: #1589ee;                 /* Primary blue - links, CTAs */
+  --theme-primary-dark: #005fb2;            /* Primary blue dark - gradients */
+  --theme-primary-darker: #014486;          /* Darker blue variant */
+  --theme-primary-light: #0176d3;           /* Light blue variant */
+
+  /* ===== ACCENT COLORS (Feature Icons) ===== */
+  --theme-accent-teal: #06a59a;             /* DevOps pipeline */
+  --theme-accent-teal-dark: #045a55;
+  --theme-accent-purple: #8b5cf6;           /* Metadata retriever */
+  --theme-accent-purple-dark: #6d28d9;
+  --theme-accent-cyan: #54a4a6;             /* Org monitoring */
+  --theme-accent-cyan-dark: #026d71;
+  --theme-accent-orange: #ff6b35;           /* Files workbench */
+  --theme-accent-orange-dark: #d4471b;
+  --theme-accent-violet: #9f4fea;           /* Data workbench */
+  --theme-accent-violet-dark: #7b2cbf;
+  --theme-accent-amber: #ffb439;            /* Documentation */
+  --theme-accent-amber-dark: #e6930f;
+  --theme-accent-gray: #706e6b;             /* Settings */
+  --theme-accent-gray-dark: #514f4d;
+  --theme-accent-indigo: #6366f1;           /* Services icon */
+
+  /* ===== SUCCESS/POSITIVE COLORS ===== */
+  --theme-success: #22c55e;                 /* Success green */
+  --theme-success-dark: #16a34a;            /* Success green dark */
+  --theme-success-bg: rgba(34, 197, 94, 0.1);  /* Success background */
+
+  /* ===== SHADOW VALUES ===== */
+  --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);           /* Small shadow */
+  --theme-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);          /* Medium shadow */
+  --theme-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);         /* Large shadow */
+  --theme-shadow-xl: 0 4px 20px rgba(0, 0, 0, 0.08);         /* Extra large shadow */
+  --theme-shadow-feature: 0 3px 10px rgba(0, 0, 0, 0.15);    /* Feature card shadow */
+  --theme-shadow-feature-hover: 0 5px 15px rgba(0, 0, 0, 0.2);  /* Feature card hover */
+  
+  /* ===== COLORED SHADOWS (for icon containers) ===== */
+  --theme-shadow-primary: 0 3px 10px rgba(21, 137, 238, 0.25);
+  --theme-shadow-primary-strong: 0 4px 12px rgba(21, 137, 238, 0.3);
+  --theme-shadow-teal: 0 3px 10px rgba(6, 165, 154, 0.25);
+  --theme-shadow-purple: 0 3px 10px rgba(139, 92, 246, 0.25);
+  --theme-shadow-cyan: 0 3px 10px rgba(84, 164, 166, 0.25);
+  --theme-shadow-orange: 0 3px 10px rgba(255, 107, 53, 0.25);
+  --theme-shadow-violet: 0 3px 10px rgba(159, 79, 234, 0.25);
+  --theme-shadow-amber: 0 3px 10px rgba(255, 180, 57, 0.25);
+  --theme-shadow-gray: 0 3px 10px rgba(112, 110, 107, 0.25);
+  --theme-shadow-success: 0 4px 12px rgba(34, 197, 94, 0.3);
+
+  /* ===== GRADIENT DEFINITIONS ===== */
+  --theme-gradient-bg: linear-gradient(135deg, var(--theme-bg-primary) 0%, var(--theme-bg-primary-end) 100%);
+  --theme-gradient-primary: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-primary-dark) 100%);
+  --theme-gradient-teal: linear-gradient(135deg, var(--theme-accent-teal) 0%, var(--theme-accent-teal-dark) 100%);
+  --theme-gradient-purple: linear-gradient(135deg, var(--theme-accent-purple) 0%, var(--theme-accent-purple-dark) 100%);
+  --theme-gradient-cyan: linear-gradient(135deg, var(--theme-accent-cyan) 0%, var(--theme-accent-cyan-dark) 100%);
+  --theme-gradient-orange: linear-gradient(135deg, var(--theme-accent-orange) 0%, var(--theme-accent-orange-dark) 100%);
+  --theme-gradient-violet: linear-gradient(135deg, var(--theme-accent-violet) 0%, var(--theme-accent-violet-dark) 100%);
+  --theme-gradient-amber: linear-gradient(135deg, var(--theme-accent-amber) 0%, var(--theme-accent-amber-dark) 100%);
+  --theme-gradient-gray: linear-gradient(135deg, var(--theme-accent-gray) 0%, var(--theme-accent-gray-dark) 100%);
+  --theme-gradient-packages: linear-gradient(135deg, var(--theme-primary-light) 0%, var(--theme-primary-darker) 100%);
+  --theme-gradient-success: linear-gradient(135deg, var(--theme-success) 0%, var(--theme-success-dark) 100%);
+  --theme-gradient-highlight: linear-gradient(135deg, var(--theme-bg-highlight) 0%, var(--theme-bg-highlight-end) 100%);
+  --theme-gradient-success-bg: linear-gradient(135deg, var(--theme-bg-success) 0%, var(--theme-bg-success-end) 100%);
+
+  /* ===== COMPONENT-SPECIFIC VALUES ===== */
+  --theme-border-radius-sm: 6px;
+  --theme-border-radius-md: 8px;
+  --theme-border-radius-lg: 12px;
+  --theme-border-radius-xl: 16px;
+  
+  --theme-card-hover-transform: translateY(-4px);
+  --theme-icon-hover-transform: translateY(-2px);
+  --theme-button-hover-transform: translateY(-1px);
+
+  /* ===== ICON COLORS (for lightning-icon override) ===== */
+  --theme-icon-white: white !important;
+}
+
+.dark-themee {
+  /* ===== BACKGROUND COLORS ===== */
+  --theme-bg-primary: #1a1d24;              /* Main background dark */
+  --theme-bg-primary-end: #0f1318;          /* Main background gradient end */
+  --theme-bg-secondary: #22252d;            /* Card/panel background */
+  --theme-bg-tertiary: #2a2e38;             /* Settings section background */
+  --theme-bg-highlight: #1e2938;            /* Getting started section gradient start */
+  --theme-bg-highlight-end: #152036;        /* Getting started section gradient end */
+  --theme-bg-success: #1a2e23;              /* Open source section gradient start */
+  --theme-bg-success-end: #15261e;          /* Open source section gradient end */
+  --theme-bg-overlay: rgba(34, 37, 45, 0.7);  /* Semi-transparent overlay */
+  --theme-bg-overlay-strong: rgba(34, 37, 45, 0.9);  /* Strong overlay */
+
+  /* ===== TEXT COLORS ===== */
+  --theme-text-primary: #e8e8e8;            /* Main text, headings */
+  --theme-text-secondary: #a8a6a3;          /* Subtitles, descriptions */
+  --theme-text-tertiary: #b8bcc8;           /* Body text in special sections */
+  --theme-text-quaternary: #a0a5b0;         /* Services card text */
+  --theme-text-dark: #d1d5db;               /* Dark emphasis text (lighter in dark mode) */
+
+  /* ===== BORDER COLORS ===== */
+  --theme-border-light: #3a3d45;            /* Light borders */
+  --theme-border-medium: #2f3239;           /* Medium borders */
+  --theme-border-primary: rgba(21, 137, 238, 0.3);  /* Primary accent border */
+  --theme-border-success: rgba(34, 197, 94, 0.3);   /* Success accent border */
+  --theme-border-highlight: #2d4a6f;        /* Highlight section border */
+  --theme-border-success-strong: #2d5a40;   /* Strong success border */
+  --theme-border-neutral: rgba(156, 163, 175, 0.2); /* Neutral border */
+
+  /* ===== PRIMARY BRAND COLORS ===== */
+  /* Keep primary colors vibrant in dark mode */
+  --theme-primary: #3b9fff;                 /* Slightly lighter blue for dark mode */
+  --theme-primary-dark: #1589ee;            /* Original blue */
+  --theme-primary-darker: #0176d3;          /* Darker variant */
+  --theme-primary-light: #58b3ff;           /* Lighter variant */
+
+  /* ===== ACCENT COLORS (Feature Icons) ===== */
+  /* Keep accent colors vibrant */
+  --theme-accent-teal: #0ec5b9;
+  --theme-accent-teal-dark: #06a59a;
+  --theme-accent-purple: #a78bfa;
+  --theme-accent-purple-dark: #8b5cf6;
+  --theme-accent-cyan: #67c6c8;
+  --theme-accent-cyan-dark: #54a4a6;
+  --theme-accent-orange: #ff8558;
+  --theme-accent-orange-dark: #ff6b35;
+  --theme-accent-violet: #b575ff;
+  --theme-accent-violet-dark: #9f4fea;
+  --theme-accent-amber: #ffc757;
+  --theme-accent-amber-dark: #ffb439;
+  --theme-accent-gray: #8b8986;
+  --theme-accent-gray-dark: #706e6b;
+  --theme-accent-indigo: #818cf8;
+
+  /* ===== SUCCESS/POSITIVE COLORS ===== */
+  --theme-success: #34d87c;
+  --theme-success-dark: #22c55e;
+  --theme-success-bg: rgba(34, 197, 94, 0.15);
+
+  /* ===== SHADOW VALUES ===== */
+  --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --theme-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --theme-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.5);
+  --theme-shadow-xl: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --theme-shadow-feature: 0 3px 10px rgba(0, 0, 0, 0.5);
+  --theme-shadow-feature-hover: 0 5px 15px rgba(0, 0, 0, 0.6);
+  
+  /* ===== COLORED SHADOWS (darker/more subtle in dark mode) ===== */
+  --theme-shadow-primary: 0 3px 10px rgba(21, 137, 238, 0.4);
+  --theme-shadow-primary-strong: 0 4px 12px rgba(21, 137, 238, 0.5);
+  --theme-shadow-teal: 0 3px 10px rgba(6, 165, 154, 0.4);
+  --theme-shadow-purple: 0 3px 10px rgba(139, 92, 246, 0.4);
+  --theme-shadow-cyan: 0 3px 10px rgba(84, 164, 166, 0.4);
+  --theme-shadow-orange: 0 3px 10px rgba(255, 107, 53, 0.4);
+  --theme-shadow-violet: 0 3px 10px rgba(159, 79, 234, 0.4);
+  --theme-shadow-amber: 0 3px 10px rgba(255, 180, 57, 0.4);
+  --theme-shadow-gray: 0 3px 10px rgba(112, 110, 107, 0.4);
+  --theme-shadow-success: 0 4px 12px rgba(34, 197, 94, 0.5);
+
+  /* ===== GRADIENT DEFINITIONS ===== */
+  --theme-gradient-bg: linear-gradient(135deg, var(--theme-bg-primary) 0%, var(--theme-bg-primary-end) 100%);
+  --theme-gradient-primary: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-primary-dark) 100%);
+  --theme-gradient-teal: linear-gradient(135deg, var(--theme-accent-teal) 0%, var(--theme-accent-teal-dark) 100%);
+  --theme-gradient-purple: linear-gradient(135deg, var(--theme-accent-purple) 0%, var(--theme-accent-purple-dark) 100%);
+  --theme-gradient-cyan: linear-gradient(135deg, var(--theme-accent-cyan) 0%, var(--theme-accent-cyan-dark) 100%);
+  --theme-gradient-orange: linear-gradient(135deg, var(--theme-accent-orange) 0%, var(--theme-accent-orange-dark) 100%);
+  --theme-gradient-violet: linear-gradient(135deg, var(--theme-accent-violet) 0%, var(--theme-accent-violet-dark) 100%);
+  --theme-gradient-amber: linear-gradient(135deg, var(--theme-accent-amber) 0%, var(--theme-accent-amber-dark) 100%);
+  --theme-gradient-gray: linear-gradient(135deg, var(--theme-accent-gray) 0%, var(--theme-accent-gray-dark) 100%);
+  --theme-gradient-packages: linear-gradient(135deg, var(--theme-primary-light) 0%, var(--theme-primary-darker) 100%);
+  --theme-gradient-success: linear-gradient(135deg, var(--theme-success) 0%, var(--theme-success-dark) 100%);
+  --theme-gradient-highlight: linear-gradient(135deg, var(--theme-bg-highlight) 0%, var(--theme-bg-highlight-end) 100%);
+  --theme-gradient-success-bg: linear-gradient(135deg, var(--theme-bg-success) 0%, var(--theme-bg-success-end) 100%);
+
+}

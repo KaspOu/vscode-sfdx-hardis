@@ -3,12 +3,6 @@
 // @ts-nocheck
 // eslint-env es6
 import { LightningElement, api, track } from "lwc";
-import "s/forceLightTheme"; // Ensure light theme is applied
-
-// Configuration - Base URL for metadata type documentation
-// Modify this URL to change where metadata type links point to
-const METADATA_DOC_BASE_URL =
-  "https://sf-explorer.github.io/sf-doc-to-json/#/cloud/all/object/";
 
 export default class PackageXml extends LightningElement {
   @track packageData = null;
@@ -98,18 +92,7 @@ export default class PackageXml extends LightningElement {
 
     const processedTypes = rawData.types.map((type) => {
       const hasWildcard = type.members && type.members.includes("*");
-      const rawMembers = hasWildcard ? [] : type.members || [];
-      const members = rawMembers.map((memberName) => {
-        const showDocLink =
-          type.name === "CustomObject" &&
-          typeof memberName === "string" &&
-          !memberName.includes("__");
-        return {
-          name: memberName,
-          showDocLink: showDocLink,
-          docTooltip: showDocLink ? `View ${memberName} documentation` : "",
-        };
-      });
+      const members = hasWildcard ? [] : type.members || [];
       const iconInfo = this.getMetadataTypeIcon(type.name);
       return {
         ...type,
@@ -452,10 +435,9 @@ export default class PackageXml extends LightningElement {
         // Filter members that match
         let filteredMembers = type.members || [];
         if (!typeNameMatches && type.members && Array.isArray(type.members)) {
-          filteredMembers = type.members.filter((member) => {
-            const memberName = member?.name || "";
-            return memberName.toLowerCase().includes(this.filterText);
-          });
+          filteredMembers = type.members.filter((member) =>
+            member.toLowerCase().includes(this.filterText),
+          );
         }
 
         // Include type if type name matches OR if any members match
@@ -468,7 +450,6 @@ export default class PackageXml extends LightningElement {
                 ? "All"
                 : type.members?.length || 0
               : filteredMembers.length,
-            urlTooltip: `View ${type.name} documentation`,
           };
         }
 
@@ -549,55 +530,5 @@ export default class PackageXml extends LightningElement {
         filePath: this.packageFilePath,
       },
     });
-  }
-
-  openMember(event) {
-    try {
-      const typeName = event.currentTarget?.dataset?.typeName || null;
-      const member = event.currentTarget?.dataset?.memberName || null;
-      if (!typeName || !member) return;
-      window.sendMessageToVSCode({
-        type: "openMetadataMember",
-        data: { metadataType: typeName, metadataName: member },
-      });
-    } catch (e) {
-      // ignore
-    }
-  }
-
-  openStandardObjectDocumentation(event) {
-    try {
-      event.preventDefault();
-      event.stopPropagation();
-      const objectName = event.currentTarget?.dataset?.memberName || null;
-      if (!objectName) {
-        return;
-      }
-      if (objectName.includes("__")) {
-        return;
-      }
-      const docUrl = `${METADATA_DOC_BASE_URL}${objectName}`;
-      window.sendMessageToVSCode({
-        type: "openExternal",
-        data: docUrl,
-      });
-    } catch (e) {
-      // ignore
-    }
-  }
-
-  openMetadataDocumentation(event) {
-    try {
-      event.preventDefault();
-      const typeName = event.currentTarget?.dataset?.typeName || null;
-      if (!typeName) return;
-      const docUrl = `${METADATA_DOC_BASE_URL}${typeName}`;
-      window.sendMessageToVSCode({
-        type: "openExternal",
-        data: docUrl,
-      });
-    } catch (e) {
-      // ignore
-    }
   }
 }

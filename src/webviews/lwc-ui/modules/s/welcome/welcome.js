@@ -3,12 +3,12 @@
 // @ts-nocheck
 // eslint-env es6
 import { LightningElement, api, track } from "lwc";
-import "s/forceLightTheme"; // Ensure light theme is applied
 
 export default class Welcome extends LightningElement {
   @track isLoading = false;
   @track showWelcomeAtStartup = true;
   @track setupHidden = false;
+  @track theme = 'light';
   scrollThreshold = 100; // Hide toggle after scrolling 100px
   connectedCallback() {
     // Bind handler once so we can remove it later
@@ -43,6 +43,11 @@ export default class Welcome extends LightningElement {
     // Initialize the setting value
     if (data && data.showWelcomeAtStartup !== undefined) {
       this.showWelcomeAtStartup = data.showWelcomeAtStartup;
+    }
+
+    // Initialize theme from body class
+    if (data && data.theme !== undefined) {
+      this.theme = data.theme;
     }
   }
 

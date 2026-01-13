@@ -7,6 +7,51 @@
     font-family: "Salesforce Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Dark theme overrides (component-scoped) */
+.blue-back[data-theme="dark"] {
+    background: linear-gradient(135deg, #071026 0%, #081428 100%);
+    color: #e6eef9;
+}
+
+.blue-back[data-theme="dark"] .header-content,
+.blue-back[data-theme="dark"] .info-card,
+.blue-back[data-theme="dark"] .type-card,
+.blue-back[data-theme="dark"] .member-item,
+.blue-back[data-theme="dark"] .error-card {
+    background: #071428;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    color: #dbefff;
+}
+
+.blue-back[data-theme="dark"] .header-title,
+.blue-back[data-theme="dark"] .header-subtitle,
+.blue-back[data-theme="dark"] .info-title,
+.blue-back[data-theme="dark"] .info-value,
+.blue-back[data-theme="dark"] .type-name,
+.blue-back[data-theme="dark"] .member-name,
+.blue-back[data-theme="dark"] .empty-title {
+    color: #e6eef9;
+}
+
+.blue-back[data-theme="dark"] .header-icon-container {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.blue-back[data-theme="dark"] .header-subtitle,
+.blue-back[data-theme="dark"] .info-label,
+.blue-back[data-theme="dark"] .empty-description,
+.blue-back[data-theme="dark"] .section-subtitle {
+    color: #9fb0cc;
+}
+
+.blue-back[data-theme="dark"] .member-item:hover {
+    background: rgba(255,255,255,0.02);
+    border-color: rgba(62,166,255,0.08);
+    transform: translateX(0);
+}
+
 /* Main container */
 .package-container {
     max-width: 1200px;
@@ -17,17 +62,10 @@
 /* Header Section */
 .header-section {
     margin-bottom: 1rem;
-}
-
-.header-content {
-    display: flex;
-    align-items: center;
+/* Removed custom theming and background rules */
     gap: 0.75rem;
     padding: 0.75rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e8e8e8;
+/* Removed dark theme overrides */
 }
 
 .header-icon-container {
@@ -408,18 +446,6 @@
     min-width: 0;
 }
 
-.member-doc-button {
-    margin-left: auto;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-}
-
-.member-doc-icon {
-    color: #1589ee;
-    cursor: pointer;
-}
-
 /* Empty State */
 .empty-state {
     text-align: center;
@@ -442,10 +468,6 @@
     color: #706e6b;
     margin: 0;
     line-height: 1.5;
-}
-
-.member-item {
-    cursor: pointer; /* indicate clickable */
 }
 
 /* Responsive Design */

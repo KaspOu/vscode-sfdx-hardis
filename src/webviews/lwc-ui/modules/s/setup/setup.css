@@ -187,6 +187,28 @@
 .status-version { color:#6b7280; font-size:0.85rem; margin-left:6px }
 .status-description { color:#6b7280; margin:0; font-size:0.88rem; line-height:1.2 }
 
+/* Dark-mode adjustments for status text and icons */
+.blue-back[data-theme="dark"] .status-title,
+.blue-back[data-theme="dark"] .status-label {
+    color: #ffffff;
+}
+
+.blue-back[data-theme="dark"] .status-version,
+.blue-back[data-theme="dark"] .status-description {
+    color: #c6ccd2;
+}
+
+.blue-back[data-theme="dark"] .status-card {
+    background: #151719;
+    border-color: #26292c;
+    box-shadow: none;
+}
+
+.blue-back[data-theme="dark"] .status-icon-container {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
 .status-actions { display:flex; gap:0.5rem; align-items:center; flex-shrink:0; margin-left:auto }
 .status-button { border-radius:6px; padding:0.45rem 0.75rem }
 .status-button.primary { box-shadow: 0 1px 3px rgba(0,0,0,0.06) }

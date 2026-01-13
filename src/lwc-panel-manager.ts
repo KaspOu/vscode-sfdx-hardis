@@ -245,4 +245,13 @@ export class LwcPanelManager {
     this.disposeAllPanels();
     LwcPanelManager.instance = null;
   }
+
+  
+  /**
+   * Resolve the theme string based on configuration
+   * @returns The resolved theme string
+   */
+  public static resolveTheme(colorTheme: string): string {
+    return LwcUiPanel.resolveTheme(colorTheme);
+  }
 }
