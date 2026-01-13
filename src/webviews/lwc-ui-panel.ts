@@ -605,27 +605,31 @@ export class LwcUiPanel {
    * Refresh the webview HTML (useful when configuration changes, like theme)
    */
   public refresh(data: any): void {
-    if (data) {
-      this.initializationData = { ...this.initializationData, ...data };
+    
+    if (data?.colorTheme) {
+      this.sendMessage({
+        type: "updateTheme",
+        data
+      });
     }
-    this.update();
+    else {
+      this.update();
+    }
   }
 
   /**
    * Resolve the theme to use based on the input and VS Code's active theme
    * @param theme The input theme, can be "auto", "dark", "light", dark-high-contrast" or "light-high-contrast"
-   * @returns The resolved theme string
+   * @returns The resolved theme string: everything but "auto"
    */
   public static resolveTheme(theme: string): string {
     if (theme === "auto") {
       const vsCodeTheme = vscode.window.activeColorTheme.kind;
       switch (vsCodeTheme) {
+        case vscode.ColorThemeKind.HighContrast:
         case vscode.ColorThemeKind.Dark:
           return "dark";
-        case vscode.ColorThemeKind.HighContrast:
-          return "high-contrast";
         case vscode.ColorThemeKind.HighContrastLight:
-          // return "light-high-contrast";
         case vscode.ColorThemeKind.Light:
         default:
           return "light";
@@ -633,30 +637,6 @@ export class LwcUiPanel {
     }
 
     return theme;  
-  }
-
-  /**
-   * Get the CSS class and styles for the specified theme
-   * @param theme The input theme, can be "auto", "dark", "light", dark-high-contrast" or "light-high-contrast"
-   * @returns An object containing the CSS class and styles for the theme
-   */
-  private getThemeSettings(theme: string): { themeColor: string} {
-    let themeColor = "light";
-
-    switch (LwcUiPanel.resolveTheme(theme)) {
-      case "dark":
-        themeColor = "dark";
-        break;
-      case "dark-high-contrast":
-        themeColor = "high-contrast";
-        break;
-      case "light-high-contrast":
-      case "light":
-      default:
-        break;
-    }
-
-    return { themeColor };
   }
 
   private getHtmlForWebview(webview: vscode.Webview) {
@@ -695,8 +675,8 @@ export class LwcUiPanel {
 
     // Determine theme based on configuration
     const config = vscode.workspace.getConfiguration("vsCodeSfdxHardis.theme");
-    const colorTheme = config.get("colorTheme", "auto");
-    const { themeColor } = this.getThemeSettings(colorTheme as string);
+    const colorThemeConfig = config.get("colorTheme", "auto");
+    const colorTheme = LwcUiPanel.resolveTheme(colorThemeConfig);
 
     return `<!DOCTYPE html>
       <html lang="en">
@@ -716,7 +696,7 @@ export class LwcUiPanel {
         <!-- Global theme stylesheet: always included, handles both light and dark themes. -->
         <link rel="stylesheet" href="${globalThemeCssUri}">
       </head>
-      <body class="slds-scope" data-theme="${themeColor}">
+      <body class="slds-scope" data-theme="${colorTheme}">
         <div id="app" data-lwc-id="${this.lwcId}" data-init-data="${initDataJson}"></div>
         
         <script>

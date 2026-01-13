@@ -229,11 +229,10 @@ export class LwcPanelManager {
   /**
    * Refresh all active panels (useful when configuration changes, like theme)
    */
-  public refreshAllPanels(dataByPanel: any): void {
-    dataByPanel = dataByPanel || {};
+  public refreshAllPanels(data: any): void {
     this.activePanels.forEach((panel, lwcId) => {
       if (!panel.isDisposed()) {
-        panel.refresh(dataByPanel[lwcId] || {});
+        panel.refresh(data || {});
       }
     });
   }

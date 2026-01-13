@@ -5,12 +5,18 @@ export default class ExtensionConfig extends LightningElement {
   @track loading = true;
   @track error = null;
   @track activeTabValue = null;
+  @track colorTheme = 'light';
 
   @api
   initialize(data) {
     this.loading = false;
     this.error = null;
     this.activeTabValue = data.activeTabValue || null;
+
+    // Initialize theme from body class
+    if (data && data.colorTheme !== undefined) {
+      this.colorTheme = data.colorTheme;
+    }
     // Precompute all values for Lightning base components
     this.sections = (data.sections || []).map((section) => ({
       ...section,
@@ -111,8 +117,12 @@ export default class ExtensionConfig extends LightningElement {
   handleMessage(type, data) {
     if (type === "updateSuccess") {
       this.error = null;
-    } else if (type === "updateError") {
+    } 
+    else if (type === "updateError") {
       this.error = data;
+    }
+    else if (type === "updateTheme" && data && data.colorTheme) {
+      this.colorTheme = data.colorTheme;
     }
   }
 }

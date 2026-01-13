@@ -248,8 +248,14 @@ export function activate(context: vscode.ExtensionContext) {
       event.affectsConfiguration("vsCodeSfdxHardis.theme.colorTheme")
     ) {
       // Reload fresh configuration data for extension config panel
+      
+      const config = vscode.workspace.getConfiguration("vsCodeSfdxHardis.theme");
+      const colorThemeConfig = config.get("colorTheme", "auto");
+      const colorTheme = LwcPanelManager.resolveTheme(colorThemeConfig);
+      
       getExtensionConfigSections(context.extensionUri).then((sections) => {
-        LwcPanelManager.getInstance(context).refreshAllPanels({ 
+        LwcPanelManager.getInstance(context).refreshAllPanels({
+          colorTheme,
           "s-extension-config": { 
             sections: sections,
             activeTabValue: "theme" 
@@ -257,6 +263,23 @@ export function activate(context: vscode.ExtensionContext) {
         });
       }).catch((err) => {
         Logger.log("Error refreshing panels with new theme: " + err.message);
+      });
+    }
+  });
+
+  // Listen for VS Code theme changes (when user switches between light/dark/high-contrast)
+  vscode.window.onDidChangeActiveColorTheme(() => {
+    const config = vscode.workspace.getConfiguration("vsCodeSfdxHardis.theme");
+    const colorThemeConfig = config.get("colorTheme", "auto");
+
+    if (!colorThemeConfig || colorThemeConfig === "auto") {
+      const lwcManager = LwcPanelManager.getInstance(context);
+      const colorTheme = LwcPanelManager.resolveTheme(colorThemeConfig);
+      
+      // Send theme update to all active panels
+      lwcManager.sendMessageToAllPanels({
+        type: "updateTheme",
+        data: { colorTheme }
       });
     }
   });

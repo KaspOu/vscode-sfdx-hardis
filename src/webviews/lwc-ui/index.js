@@ -136,6 +136,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       flushPendingMessages();
 
+      // Avoid flash of unthemed content by applying theme early
+      if (initData?.colorTheme && element.handleMessage) {
+        element.handleMessage("updateTheme", { colorTheme: initData.colorTheme });
+      }
+
       // Wait a bit for the component to fully initialize
       setTimeout(() => {
         // Initialize the component if it has initialization data

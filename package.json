@@ -134,15 +134,13 @@
           "enum": [
             "auto",
             "light",
-            "light-high-contrast",
-            "dark",
-            "dark-high-contrast"
+            "dark"
           ],
           "enumDescriptions": [
             "🔄 Automatic (VS Code theme)",
             "☀️ Light theme",
-            "🔆 Light High contrast theme",
             "🌙 Dark theme",
+            "🔆 Light High contrast theme",
             "🌑 Dark High contrast theme"
           ],
           "description": "Display theme for SFDX-Hardis webview panels (Pipeline, Configuration, etc.)"

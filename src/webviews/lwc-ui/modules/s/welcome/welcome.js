@@ -8,7 +8,7 @@ export default class Welcome extends LightningElement {
   @track isLoading = false;
   @track showWelcomeAtStartup = true;
   @track setupHidden = false;
-  @track theme = 'light';
+  @track colorTheme = 'light';
   scrollThreshold = 100; // Hide toggle after scrolling 100px
   connectedCallback() {
     // Bind handler once so we can remove it later
@@ -46,8 +46,8 @@ export default class Welcome extends LightningElement {
     }
 
     // Initialize theme from body class
-    if (data && data.theme !== undefined) {
-      this.theme = data.theme;
+    if (data && data.colorTheme !== undefined) {
+      this.colorTheme = data.colorTheme;
     }
   }
 
@@ -55,6 +55,10 @@ export default class Welcome extends LightningElement {
   handleMessage(type, data) {
     console.log("Welcome component received message:", type, data);
     // Handle specific message types if needed
+
+    if (type === "updateTheme" && data && data.colorTheme) {
+      this.colorTheme = data.colorTheme;
+    }
   }
 
   // Navigation methods for major features

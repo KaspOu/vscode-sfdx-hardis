@@ -188,6 +188,14 @@
 .status-description { color:#6b7280; margin:0; font-size:0.88rem; line-height:1.2 }
 
 /* Dark-mode adjustments for status text and icons */
+.blue-back[data-theme="dark"] {
+    background: linear-gradient(135deg, #121217 0%, #17171b 100%);
+}
+
+.blue-back[data-theme="dark"] .slds-scope {
+    background: linear-gradient(135deg, #121217 0%, #17171b 100%);
+}
+
 .blue-back[data-theme="dark"] .status-title,
 .blue-back[data-theme="dark"] .status-label {
     color: #ffffff;
@@ -198,7 +206,8 @@
     color: #c6ccd2;
 }
 
-.blue-back[data-theme="dark"] .status-card {
+.blue-back[data-theme="dark"] .status-card,
+.blue-back[data-theme="dark"] .setup-summary-card {
     background: #151719;
     border-color: #26292c;
     box-shadow: none;
