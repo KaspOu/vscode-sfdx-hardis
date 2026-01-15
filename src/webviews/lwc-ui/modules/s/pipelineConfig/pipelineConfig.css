@@ -1,7 +1,6 @@
 /* SFDX Hardis Config Editor LWC styles */
 
 .blue-back {
-	background: #EDF4FF;
 	min-height: 100vh;
 }
 
@@ -41,21 +40,33 @@ lightning-datatable {
 	margin-top: 0.5rem;
 }
 
-/* Dark theme overrides (component-scoped) */
-.blue-back[data-theme="dark"] {
-	background: linear-gradient(135deg, #071026 0%, #081428 100%);
-	color: #e6eef9;
+/* Light theme (explicit) */
+.slds-scope[data-theme] .slds-badge {
+	background: rgba(0, 0, 0, 0.04);
+	color: #181818;
 }
 
-.blue-back[data-theme="dark"] .slds-badge {
+.slds-scope[data-theme] .slds-text-title_bold {
+	color: #181818;
+}
+
+.slds-scope[data-theme] lightning-datatable {
+	color: #181818;
+}
+
+/* Dark theme overrides (component-scoped) */
+.blue-back[data-theme="dark"] .slds-badge,
+.blue-back[data-theme="dark-high-contrast"] .slds-badge {
 	background: rgba(255,255,255,0.04);
 	color: #cfe6ff;
 }
 
-.blue-back[data-theme="dark"] .slds-text-title_bold {
+.blue-back[data-theme="dark"] .slds-text-title_bold,
+.blue-back[data-theme="dark-high-contrast"] .slds-text-title_bold {
 	color: #e6eef9;
 }
 
-.blue-back[data-theme="dark"] lightning-datatable {
+.blue-back[data-theme="dark"] lightning-datatable,
+.blue-back[data-theme="dark-high-contrast"] lightning-datatable {
 	color: #dbefff;
 }

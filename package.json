@@ -134,7 +134,9 @@
           "enum": [
             "auto",
             "light",
-            "dark"
+            "dark",
+            "light-high",
+            "dark-high"
           ],
           "enumDescriptions": [
             "🔄 Automatic (VS Code theme)",

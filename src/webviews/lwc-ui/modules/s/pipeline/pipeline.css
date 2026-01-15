@@ -75,6 +75,13 @@ lightning-datatable .hardis-emoji-cell a {
     animation: edgeAnimationSlow 2s ease-in-out infinite !important;
 }
 
+.slds-scope[data-theme="dark"] .mermaid svg g.cluster>rect,
+.slds-scope[data-theme="dark-high-contrast"] .mermaid svg g.cluster>rect {
+    fill: #333 !important;
+}
 
-
+.slds-scope[data-theme="dark"] .mermaid svg g.edgeLabel p,
+.slds-scope[data-theme="dark-high-contrast"] .mermaid svg g.edgeLabel p {
+    background-color: rgba(77, 77, 77, 0.5) !important;
+}
 

@@ -1,18 +1,10 @@
-div.blue-back[data-theme] {
-    background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%);
-    min-height: 100vh;
-}
-div.blue-back[data-theme="dark"] {
-    background: linear-gradient(135deg, #121217 0%, #17171b 100%);
+.header-section {
+    padding: 1rem .75rem 0 .75rem;
 }
 
 .slds-form-element {
     max-width: 600px;
 }
-
-
-
-
 
 /* Reduce vertical spacing between form elements */
 .slds-form-element {

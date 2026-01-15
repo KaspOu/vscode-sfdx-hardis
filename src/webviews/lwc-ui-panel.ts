@@ -193,6 +193,12 @@ export class LwcUiPanel {
     if (vsCodeSfdxHardisConfiguration) {
       data.vsCodeSfdxHardisConfiguration = vsCodeSfdxHardisConfiguration;
     }
+
+    // Always add colorTheme to initialization data for consistent theme support
+    const config = vscode.workspace.getConfiguration("vsCodeSfdxHardis.theme");
+    const colorThemeConfig = config.get("colorTheme", "auto");
+    data.colorTheme = LwcUiPanel.resolveTheme(colorThemeConfig);
+
     this.panel.webview.postMessage({
       type: "initialize",
       data: data,
@@ -606,7 +612,7 @@ export class LwcUiPanel {
    */
   public refresh(data: any): void {
     
-    if (data?.colorTheme) {
+    if (data?.colorTheme) { // FIXME
       this.sendMessage({
         type: "updateTheme",
         data
@@ -678,6 +684,17 @@ export class LwcUiPanel {
     const colorThemeConfig = config.get("colorTheme", "auto");
     const colorTheme = LwcUiPanel.resolveTheme(colorThemeConfig);
 
+    const mermaidTheme = {
+      clusterBkg: "#EAF5FC",
+      edgeLabelBackground: "rgba(232,232,232, 0.8)"
+    }
+    if (colorTheme.indexOf("dark") >= 0) {
+      mermaidTheme.clusterBkg = "#333";
+      mermaidTheme.edgeLabelBackground = "rgba(77, 77, 77, 0.5)";
+    }
+    const colorThemeInfo = colorTheme.split('-')
+    const colorContrast = colorThemeInfo.length > 1 ? colorThemeInfo[1] : "";
+
     return `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -690,13 +707,13 @@ export class LwcUiPanel {
         <title>SFDX Hardis LWC UI</title>
         <style>
           body { margin: 0; padding: 0; }
-          #app { width: 100%; height: 100vh; }
+          #app { width: 100%; min-height: 100vh; height: auto; }
         </style>
 
         <!-- Global theme stylesheet: always included, handles both light and dark themes. -->
         <link rel="stylesheet" href="${globalThemeCssUri}">
       </head>
-      <body class="slds-scope" data-theme="${colorTheme}">
+      <body class="slds-scope blue-back" data-theme="${colorThemeInfo[0]}" data-contrast="${colorContrast}">
         <div id="app" data-lwc-id="${this.lwcId}" data-init-data="${initDataJson}"></div>
         
         <script>
@@ -709,7 +726,8 @@ export class LwcUiPanel {
               startOnLoad: false,
               securityLevel: 'loose',
               themeVariables: {
-                clusterBkg: "#EAF5FC"
+                clusterBkg: "${mermaidTheme.clusterBkg}",
+                edgeLabelBackground: "${mermaidTheme.edgeLabelBackground}"
               }
             });
         </script>

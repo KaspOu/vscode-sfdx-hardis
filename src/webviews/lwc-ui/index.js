@@ -21,6 +21,18 @@ function routeMessageToComponent(message) {
     }
   }
 
+  if (message.type === "updateTheme") {
+    const colorTheme = message.data?.colorTheme;
+    if (colorTheme && document?.body) {
+      const colorThemeInfo = colorTheme.split('-')
+      document.body.setAttribute("data-theme", colorThemeInfo[0]);
+      document.body.setAttribute("data-contrast", colorThemeInfo.length > 1 ? colorThemeInfo[1] : "" );
+      console.log('test')
+      console.log('test', document.getElementById("app").querySelector('div'))
+      document.getElementById("app")?.querySelector('div')?.setAttribute("data-theme", colorThemeInfo[0]);
+    }
+  }
+
   if (typeof component.handleMessage === "function") {
     component.handleMessage(message.type, message.data);
   }

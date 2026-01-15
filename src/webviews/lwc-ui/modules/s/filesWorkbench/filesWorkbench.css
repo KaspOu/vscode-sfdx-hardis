@@ -10,7 +10,6 @@
 }
 
 .blue-back {
-	background: #EDF4FF;
 	min-height: 100vh;
 	height: 100vh; /* Ensure full viewport height */
 	margin: 0; /* Remove any margins */
