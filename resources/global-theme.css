@@ -49,7 +49,6 @@ div.slds-scope[data-theme="dark-high-contrast"] {
     */
 
 /* Generic surfaces (cards, boxes, headers, modals) */
-.slds-scope[data-theme="light"] .slds-card,
 .slds-scope[data-theme="light"] .slds-box,
 .slds-scope[data-theme="light"] .slds-page-header,
 .slds-scope[data-theme="light"] .slds-modal__content,
@@ -71,7 +70,6 @@ div.slds-scope[data-theme="dark-high-contrast"] {
 
 .slds-scope[data-theme="dark"] .slds-button--neutral,
 .slds-scope[data-theme="dark"] .slds-button_neutral,
-.slds-scope[data-theme="dark"] .slds-card,
 .slds-scope[data-theme="dark"] .slds-box,
 .slds-scope[data-theme="dark"] .slds-page-header,
 .slds-scope[data-theme="dark"] .slds-modal__content,
@@ -89,9 +87,13 @@ div.slds-scope[data-theme="dark-high-contrast"] {
 .slds-scope[data-theme="dark"] .slds-modal__footer,
 .slds-scope[data-theme="dark"] .slds-modal__close,
 .slds-scope[data-theme="dark"] .slds-text-color_weak,
+.slds-scope[data-theme="dark"] .slds-button_icon-border-filled,
+.slds-scope[data-theme="dark"] .slds-button_text-border-filled,
+.slds-scope[data-theme="dark"] .slds-table,
+.slds-scope[data-theme="dark"] .slds-th__action,
+/* .slds-table:not(.slds-no-row-hover) tbody tr:hover>td, .slds-table:not(.slds-no-row-hover) tbody tr:hover>th, */
 .slds-scope[data-theme="dark-high-contrast"] .slds-button--neutral,
 .slds-scope[data-theme="dark-high-contrast"] .slds-button_neutral,
-.slds-scope[data-theme="dark-high-contrast"] .slds-card,
 .slds-scope[data-theme="dark-high-contrast"] .slds-box,
 .slds-scope[data-theme="dark-high-contrast"] .slds-page-header,
 .slds-scope[data-theme="dark-high-contrast"] .slds-modal__content,
@@ -108,13 +110,13 @@ div.slds-scope[data-theme="dark-high-contrast"] {
 .slds-scope[data-theme="dark-high-contrast"] .slds-modal__header,
 .slds-scope[data-theme="dark-high-contrast"] .slds-modal__footer,
 .slds-scope[data-theme="dark-high-contrast"] .slds-modal__close,
-.slds-scope[data-theme="dark"] .slds-button_icon-border-filled,
-.slds-scope[data-theme="dark"] .slds-button_text-border-filled,
 .slds-scope[data-theme="dark-high-contrast"] .slds-button_icon-border-filled,
 .slds-scope[data-theme="dark-high-contrast"] .slds-text-color_weak {
   background: #252526;
   color: #d4d4d4;
   border-color: #333333;
+  --slds-g-color-neutral-base-95: #1e1e1e;
+  /* --slds-g-color-neutral-base-100: #333; */
 }
 
 /* Brand button disabled state in dark mode */
@@ -130,7 +132,8 @@ div.slds-scope[data-theme="dark-high-contrast"] {
   background: #797979;
 }
 .slds-scope[data-theme="dark"] .slds-radio_button__label,
-.slds-scope[data-theme="dark-high-contrast"] .slds-radio_button__label {
+.slds-scope[data-theme="dark-high-contrast"] .slds-radio_button__label,
+.slds-scope[data-theme] .slds-text-color_weak {
   background: transparent;
 }
 
@@ -296,6 +299,7 @@ div.slds-scope[data-theme="dark-high-contrast"] {
 .slds-scope[data-theme="dark"] .member-name,
 .slds-scope[data-theme="dark"] .empty-title,
 .slds-scope[data-theme="dark"] .slds-tabs_default__item.slds-is-active,
+.slds-scope[data-theme="dark"] .slds-th__action:hover,
 .slds-scope[data-theme="dark-high-contrast"] .title,
 .slds-scope[data-theme="dark-high-contrast"] .section-title,
 .slds-scope[data-theme="dark-high-contrast"] .header-title,
@@ -303,7 +307,7 @@ div.slds-scope[data-theme="dark-high-contrast"] {
 .slds-scope[data-theme="dark-high-contrast"] .slds-text-heading_small,
 .slds-scope[data-theme="dark-high-contrast"] .command-title,
 .slds-scope[data-theme="dark-high-contrast"] .status-title,
-.slds-scope[data-theme="dark-high-contrast"] .slds-card__header-title,
+.slds-scope[data-theme="dark-high-contrast"] .slds-cardd__header-title,
 .slds-scope[data-theme="dark-high-contrast"] .docs-title,
 .slds-scope[data-theme="dark-high-contrast"] .info-title,
 .slds-scope[data-theme="dark-high-contrast"] .info-value,
@@ -374,6 +378,8 @@ div.slds-scope[data-theme="dark-high-contrast"] {
 .slds-scope[data-theme="dark"] .slds-dropdown__item>a,
 .slds-scope[data-theme="dark"] .slds-dueling-list__options,
 .slds-scope[data-theme="dark"] .slds-listbox__option.slds-has-focus,
+.slds-scope[data-theme="dark"] .slds-table td > .slds-has-focus,
+.slds-scope[data-theme="dark"] .slds-card,
 .slds-scope[data-theme="dark-high-contrast"] input,
 .slds-scope[data-theme="dark-high-contrast"] textarea,
 .slds-scope[data-theme="dark-high-contrast"] select,
@@ -389,6 +395,7 @@ div.slds-scope[data-theme="dark-high-contrast"] {
   color: #d4d4d4;
   border-color: #333333;
   --slds-g-shadow-inset-focus-1: 0 0 0 2px #1e1e1e inset,0 0 0 4px #0B5CAB inset;
+  --slds-g-color-neutral-base-95: #1e1e1e;
 }
 
 /* Scrollbar tweaks for dark */
@@ -414,7 +421,7 @@ div.slds-scope[data-theme="dark-high-contrast"] {
 
 /* Section header hover states */
 .slds-scope[data-theme="light"] .section-header:hover { background-color: #f8f9fa; }
-.slds-scope[data-theme="dark"] .section-header:hover,
+/* .slds-scope[data-theme="dark"] .section-header:hover, */
 .slds-scope[data-theme="dark-high-contrast"] .section-header:hover { background-color: #2d2d2d; }
 
 /* --- Semantic accents for Org Monitoring (and reusable elsewhere) --- */
@@ -871,85 +878,3 @@ div.slds-scope[data-theme="dark-high-contrast"] {
 .slds-scope[data-theme="dark-high-contrast"] .select-option-label {
     color: #ffffff;
 }
-
-
-/* Package */
-/*
-.slds-scope[data-theme="light"] .header-content,
-.slds-scope[data-theme="light"] .info-card,
-.slds-scope[data-theme="light"] .type-card,
-.slds-scope[data-theme="light"] .member-item,
-.slds-scope[data-theme="light"] .error-card {
-    background: #ffffff;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    color: #181818;
-}
-
-.slds-scope[data-theme="light"] .header-title,
-.slds-scope[data-theme="light"] .info-title,
-.slds-scope[data-theme="light"] .info-value,
-.slds-scope[data-theme="light"] .type-name,
-.slds-scope[data-theme="light"] .member-name,
-.slds-scope[data-theme="light"] .empty-title {
-    color: #181818;
-}
-
-.slds-scope[data-theme="light"] .header-icon-container {
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    border: 2px solid rgba(255, 255, 255, 0.16);
-}
-
-.slds-scope[data-theme="light"] .header-subtitle,
-.slds-scope[data-theme="light"] .info-label,
-.slds-scope[data-theme="light"] .empty-description,
-.slds-scope[data-theme="light"] .section-subtitle {
-    color: #706e6b;
-}
-.slds-scope[data-theme="light"] .member-item:hover {
-    background: #e8f4fd;
-    border-color: #1589ee;
-    transform: translateX(4px);
-}
-
-.slds-scope[data-theme="dark"] .header-content,
-.slds-scope[data-theme="dark"] .info-card,
-.slds-scope[data-theme="dark"] .type-card,
-.slds-scope[data-theme="dark"] .member-item,
-.slds-scope[data-theme="dark"] .error-card,
-.slds-scope[data-theme="dark-high-contrast"] .header-content,
-.slds-scope[data-theme="dark-high-contrast"] .info-card,
-.slds-scope[data-theme="dark-high-contrast"] .type-card,
-.slds-scope[data-theme="dark-high-contrast"] .member-item,
-.slds-scope[data-theme="dark-high-contrast"] .error-card {
-    background: #071428;
-    border: 1px solid rgba(255,255,255,0.04);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-    color: #dbefff;
-}
-
-
-
-.slds-scope[data-theme="dark"] .header-icon-container,
-.slds-scope[data-theme="dark-high-contrast"] .header-icon-container {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.04);
-}
-
-.slds-scope[data-theme="dark"] .header-subtitle,
-.slds-scope[data-theme="dark"] .info-label,
-.slds-scope[data-theme="dark"] .empty-description,
-.slds-scope[data-theme="dark"] .section-subtitle,
-.slds-scope[data-theme="dark-high-contrast"] .header-subtitle,
-.slds-scope[data-theme="dark-high-contrast"] .info-label,
-.slds-scope[data-theme="dark-high-contrast"] .empty-description,
-.slds-scope[data-theme="dark-high-contrast"] .section-subtitle {
-    color: #9fb0cc;
-}
-
-.slds-scope[data-theme="dark"] .member-item:hover,
-.slds-scope[data-theme="dark-high-contrast"] .member-item:hover {
-    background: rgba(255,255,255,0.02);
-    border-color: rgba(62,166,255,0.08);
-    transform: translateX(0);
-}*/

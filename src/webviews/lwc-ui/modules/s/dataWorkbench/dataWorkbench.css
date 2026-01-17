@@ -497,6 +497,7 @@ lightning-button-menu {
 }
 
 .slds-scope[data-theme="dark"] .workspace-folder-name,
+.slds-scope[data-theme="dark"] .slds-card__body .slds-col,
 .slds-scope[data-theme="dark-high-contrast"] .workspace-folder-name {
     color: #d4d4d4;
     background-color: rgba(255, 255, 255, 0.05);
@@ -548,4 +549,9 @@ lightning-button-menu {
 .slds-scope[data-theme="dark"] .exported-file-row,
 .slds-scope[data-theme="dark-high-contrast"] .exported-file-row {
     border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+.slds-col,
+.slds-col .slds-text-color_weak {
+  background: transparent !important;
 }
