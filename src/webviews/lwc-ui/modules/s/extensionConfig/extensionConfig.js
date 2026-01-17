@@ -1,11 +1,11 @@
 import { LightningElement, track, api } from "lwc";
+import { ColorThemeMixin } from "s/colorThemeMixin";
 
-export default class ExtensionConfig extends LightningElement {
+export default class ExtensionConfig extends ColorThemeMixin(LightningElement) {
   @track sections = [];
   @track loading = true;
   @track error = null;
   @track activeTabValue = null;
-  @track colorTheme = 'light';
 
   @api
   initialize(data) {
@@ -13,10 +13,6 @@ export default class ExtensionConfig extends LightningElement {
     this.error = null;
     this.activeTabValue = data.activeTabValue || null;
 
-    // Initialize theme from body class
-    if (data && data.colorTheme !== undefined) {
-      this.colorTheme = data.colorTheme;
-    }
     // Precompute all values for Lightning base components
     this.sections = (data.sections || []).map((section) => ({
       ...section,
@@ -121,8 +117,12 @@ export default class ExtensionConfig extends LightningElement {
     else if (type === "updateError") {
       this.error = data;
     }
-    else if (type === "updateTheme" && data && data.colorTheme) {
-      this.colorTheme = data.colorTheme;
-    }
+  }
+
+  @api
+  handleColorThemeMessage(type, data) {
+    // Delegate to the mixin's implementation
+    if (super.handleColorThemeMessage)
+      super.handleColorThemeMessage(type, data);
   }
 }

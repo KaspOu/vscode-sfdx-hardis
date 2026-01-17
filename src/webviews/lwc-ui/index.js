@@ -22,14 +22,12 @@ function routeMessageToComponent(message) {
   }
 
   if (message.type === "updateTheme") {
-    const colorTheme = message.data?.colorTheme;
-    if (colorTheme && document?.body) {
-      const colorThemeInfo = colorTheme.split('-')
-      document.body.setAttribute("data-theme", colorThemeInfo[0]);
-      document.body.setAttribute("data-contrast", colorThemeInfo.length > 1 ? colorThemeInfo[1] : "" );
-      console.log('test')
-      console.log('test', document.getElementById("app").querySelector('div'))
-      document.getElementById("app")?.querySelector('div')?.setAttribute("data-theme", colorThemeInfo[0]);
+    if (message.data?.colorTheme && document?.body) {
+      document.body.setAttribute("data-theme", message.data?.colorTheme);
+      document.body.setAttribute("data-contrast", message.data?.colorContrast);
+      if (typeof component.handleColorThemeMessage === "function") {
+        component.handleColorThemeMessage(message.type, message.data);
+      }
     }
   }
 
@@ -149,8 +147,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       flushPendingMessages();
 
       // Avoid flash of unthemed content by applying theme early
-      if (initData?.colorTheme && element.handleMessage) {
-        element.handleMessage("updateTheme", { colorTheme: initData.colorTheme });
+      if (initData?.colorTheme && element.handleColorThemeMessage) {
+        element.handleColorThemeMessage("updateTheme", { colorTheme: initData.colorTheme, colorContrast: initData.colorContrast } );
       }
 
       // Wait a bit for the component to fully initialize

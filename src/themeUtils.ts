@@ -4,7 +4,7 @@ import * as vscode from "vscode";
 export class ThemeUtils {
   public emojisInSections: boolean;
   public menuIconType: "vscode" | "hardis";
-  public colorTheme: "auto" | "light" | "dark" | "high-contrast";
+  public colorTheme: "auto" | "light" | "dark" | "dark-high" | "light-high";
   public allTopicEmojis: any;
   public allCommandIcons: any;
 
@@ -40,7 +40,7 @@ export class ThemeUtils {
   public static getThemeConfiguration(): {
     emojisInSections: boolean;
     menuIconType: "vscode" | "hardis";
-    colorTheme: "auto" | "light" | "dark" | "high-contrast";
+    colorTheme: "auto" | "light" | "dark" | "dark-high" | "light-high";
   } {
     const config = vscode.workspace.getConfiguration("vsCodeSfdxHardis.theme");
     return {

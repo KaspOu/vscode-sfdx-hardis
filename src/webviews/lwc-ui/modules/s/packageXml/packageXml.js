@@ -3,8 +3,9 @@
 // @ts-nocheck
 // eslint-env es6
 import { LightningElement, api, track } from "lwc";
+import { ColorThemeMixin } from "s/colorThemeMixin";
 
-export default class PackageXml extends LightningElement {
+export default class PackageXml extends ColorThemeMixin(LightningElement) {
   @track packageData = null;
   @track isLoading = true;
   @track hasError = false;
@@ -48,6 +49,13 @@ export default class PackageXml extends LightningElement {
     if (type === "packageDataUpdated") {
       this.initialize(data);
     }
+  }
+
+  @api
+  handleColorThemeMessage(type, data) {
+    // Delegate to the mixin's implementation
+    if (super.handleColorThemeMessage)
+      super.handleColorThemeMessage(type, data);
   }
 
   // Auto-detect package type from file path

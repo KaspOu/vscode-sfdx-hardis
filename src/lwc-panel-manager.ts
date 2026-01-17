@@ -247,10 +247,10 @@ export class LwcPanelManager {
 
   
   /**
-   * Resolve the theme string based on configuration
-   * @returns The resolved theme string
+   * Resolve the theme to use based on the input and VS Code's active theme
+   * @returns An object with colorTheme and colorContrast properties
    */
-  public static resolveTheme(colorTheme: string): string {
+  public static resolveTheme(colorTheme: string): any {
     return LwcUiPanel.resolveTheme(colorTheme);
   }
 }

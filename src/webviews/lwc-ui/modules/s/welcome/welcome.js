@@ -3,13 +3,14 @@
 // @ts-nocheck
 // eslint-env es6
 import { LightningElement, api, track } from "lwc";
+import { ColorThemeMixin } from "s/colorThemeMixin";
 
-export default class Welcome extends LightningElement {
+export default class Welcome extends ColorThemeMixin(LightningElement) {
   @track isLoading = false;
   @track showWelcomeAtStartup = true;
   @track setupHidden = false;
-  @track colorTheme = 'light';
   scrollThreshold = 100; // Hide toggle after scrolling 100px
+  
   connectedCallback() {
     // Bind handler once so we can remove it later
     this._boundHandleScroll = this.handleScroll.bind(this);
@@ -44,21 +45,19 @@ export default class Welcome extends LightningElement {
     if (data && data.showWelcomeAtStartup !== undefined) {
       this.showWelcomeAtStartup = data.showWelcomeAtStartup;
     }
-
-    // Initialize theme from body class
-    if (data && data.colorTheme !== undefined) {
-      this.colorTheme = data.colorTheme;
-    }
   }
 
   @api
   handleMessage(type, data) {
     console.log("Welcome component received message:", type, data);
     // Handle specific message types if needed
+  }
 
-    if (type === "updateTheme" && data && data.colorTheme) {
-      this.colorTheme = data.colorTheme;
-    }
+  @api
+  handleColorThemeMessage(type, data) {
+    // Delegate to the mixin's implementation
+    if (super.handleColorThemeMessage)
+      super.handleColorThemeMessage(type, data);
   }
 
   // Navigation methods for major features

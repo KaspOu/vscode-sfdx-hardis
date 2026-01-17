@@ -1,26 +1,125 @@
-
-
 .pipeline-container {
     /* Pipeline visualization styling */
     border-radius: 8px;
     padding: 0.25rem 0.75rem 0.75rem 0.75rem;
     min-height: 150px;
-    border: 1px solid;
 }
 
+.pipeline-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    pointer-events: none;
+}
 
+.blue-back {
+    font-family: "Salesforce Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
+/* Commands Grid - matching orgMonitoring style for Quick Actions cards */
+.commands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 0.75rem;
+    padding: 0 0.25rem;
+}
+
+.command-card {
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid;
+    transition: all 0.2s ease;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.command-card.disabled {
+    cursor: default;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.command-card.disabled:hover {
+    transform: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.command-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.command-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.command-icon-container {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: white !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.command-icon-container lightning-icon {
+    --slds-c-icon-color-foreground: white !important;
+    --slds-c-icon-color-foreground-default: white !important;
+}
 
 .command-icon-container:hover {
     transform: translateY(-1px);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Icon container accents moved to global theme */
+.command-icon-container.new-story {
+    background: linear-gradient(135deg, #1589ee 0%, #005fb2 100%);
+    box-shadow: 0 2px 8px rgba(21, 137, 238, 0.3);
+}
 
+.command-icon-container.pull-action {
+    background: linear-gradient(135deg, #06a59a 0%, #045a55 100%);
+    box-shadow: 0 2px 8px rgba(6, 165, 154, 0.3);
+}
 
+.command-icon-container.package-action {
+    background: linear-gradient(135deg, #9f4fea 0%, #7b2cbf 100%);
+    box-shadow: 0 2px 8px rgba(159, 79, 234, 0.3);
+}
 
+.command-icon-container.save-action {
+    background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
 
+.command-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.command-description {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 0.875rem;
+    flex-grow: 1;
+}
 
 /* Add spacing between lightning cards */
 .pipeline-card-spacing {
@@ -31,6 +130,68 @@
 lightning-datatable .hardis-emoji-cell a {
     text-decoration: none !important;
     cursor: pointer !important;
+}
+
+/* Provider icon button (replaces connect buttons) */
+.provider-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px; /* more clickable area */
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px; /* spacing between buttons */
+    transition: transform 120ms ease, box-shadow 160ms ease;
+}
+
+.provider-button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.provider-button img.provider-icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+/* Layout helpers for action row in card header */
+.actions-row {
+    display: flex;
+    align-items: center; /* vertical center alignment */
+    gap: 0.5rem;
+}
+
+.left-actions {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+
+.right-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 0.6rem;
+}
+
+/* Greyed (not connected) - apply filter to SVG images */
+.provider-icon.provider-grey {
+    filter: grayscale(100%) brightness(80%);
+    opacity: 0.85;
+}
+
+/* Colored (connected) - show as-is, but increase saturation slightly */
+.provider-icon.provider-colored {
+    filter: none;
+    opacity: 1;
 }
 
 /* Mermaid link animations for running/pending PRs */
@@ -75,13 +236,127 @@ lightning-datatable .hardis-emoji-cell a {
     animation: edgeAnimationSlow 2s ease-in-out infinite !important;
 }
 
-.slds-scope[data-theme="dark"] .mermaid svg g.cluster>rect,
-.slds-scope[data-theme="dark-high-contrast"] .mermaid svg g.cluster>rect {
-    fill: #333 !important;
+/* Make clickable branch nodes show pointer cursor */
+.mermaid svg .node[style*="cursor"] {
+    cursor: pointer !important;
 }
 
-.slds-scope[data-theme="dark"] .mermaid svg g.edgeLabel p,
-.slds-scope[data-theme="dark-high-contrast"] .mermaid svg g.edgeLabel p {
-    background-color: rgba(77, 77, 77, 0.5) !important;
+/* Modal overlay styling */
+.slds-modal {
+    z-index: 9000;
 }
 
+.slds-backdrop {
+    z-index: 8999;
+}
+
+/* Make modal take up more space - responsive to content */
+.slds-modal__container {
+    width: 95% !important;
+    max-width: 95vw !important;
+    max-height: 95vh !important;
+    height: 95vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Ensure modal content area is flexible and scrollable */
+.slds-modal__content {
+    max-height: calc(95vh - 180px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    flex: 1 1 auto !important;
+    position: relative !important;
+}
+
+/* Ensure tabset takes full width */
+.slds-modal__content lightning-tabset {
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Ensure datatables fit within modal without horizontal scroll */
+.slds-modal__content lightning-datatable {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* ========================================
+   THEME-AWARE COLOR DEFINITIONS
+   ======================================== */
+
+/* Light Mode Colors */
+.slds-scope[data-theme="light"] .pipeline-container {
+    background: white;
+}
+
+.slds-scope[data-theme="light"] .pipeline-loading-overlay {
+    background-color: rgba(243, 243, 243, 0.7);
+}
+
+.slds-scope[data-theme="light"] .blue-back {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%);
+}
+
+.slds-scope[data-theme="light"] .command-card {
+    background: white;
+    border-color: #e5e5e5;
+}
+
+.slds-scope[data-theme="light"] .command-card.disabled:hover {
+    border-color: #e5e5e5;
+}
+
+.slds-scope[data-theme="light"] .command-card:hover {
+    border-color: #1589ee;
+}
+
+.slds-scope[data-theme="light"] .command-title {
+    color: #181818;
+}
+
+.slds-scope[data-theme="light"] .command-description {
+    color: #706e6b;
+}
+
+/* Dark Mode Colors */
+.slds-scope[data-theme="dark"] .pipeline-container,
+.slds-scope[data-theme="dark-high-contrast"] .pipeline-container {
+    background: #252526;
+}
+
+.slds-scope[data-theme="dark"] .pipeline-loading-overlay,
+.slds-scope[data-theme="dark-high-contrast"] .pipeline-loading-overlay {
+    background-color: rgba(37, 37, 38, 0.7);
+}
+
+.slds-scope[data-theme="dark"] .blue-back,
+.slds-scope[data-theme="dark-high-contrast"] .blue-back {
+    background: linear-gradient(135deg, #121217 0%, #17171b 100%);
+}
+
+.slds-scope[data-theme="dark"] .command-card,
+.slds-scope[data-theme="dark-high-contrast"] .command-card {
+    background: #1e1e1e;
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.slds-scope[data-theme="dark"] .command-card.disabled:hover,
+.slds-scope[data-theme="dark-high-contrast"] .command-card.disabled:hover {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.slds-scope[data-theme="dark"] .command-card:hover,
+.slds-scope[data-theme="dark-high-contrast"] .command-card:hover {
+    border-color: #4ea1ff;
+}
+
+.slds-scope[data-theme="dark"] .command-title,
+.slds-scope[data-theme="dark-high-contrast"] .command-title {
+    color: #ffffff;
+}
+
+.slds-scope[data-theme="dark"] .command-description,
+.slds-scope[data-theme="dark-high-contrast"] .command-description {
+    color: #a3a3a3;
+}
